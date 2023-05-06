@@ -64,6 +64,7 @@ public:
 
         Node *temp = this->root;
         for (char c: word) {
+            if (temp->m.count(c) == 0) return;
             temp = temp->m[c];
         }
 
@@ -84,20 +85,16 @@ int main(void) {
         t.insert(word);
     }
 
-    // int q;
-    // cin >> q;
+    string search_word;
+    cin >> search_word;
 
-    // while (q--) {
-    //     string search_word;
-    //     cin >> search_word;
+    while (search_word != "!") {
+        t.suggestions(search_word);
+        
+        if (!t.search(search_word)) t.insert(search_word);
 
-    //     if (t.search(search_word)) cout << "Found" << endl;
-    //     else cout << "Not Found" << endl;
-    // }
-    
-    string q;
-    cin >> q;
-    t.suggestions(q);
+        cin >> search_word;
+    }
 
     return 0;
 }
